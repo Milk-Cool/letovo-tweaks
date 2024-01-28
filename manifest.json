@@ -1,0 +1,43 @@
+{
+	"name": "Letovo Tweaks",
+	"description": "Дополнительные настройки для летовских сайтов.",
+	"version": "0.1.2",
+	"manifest_version": 3,
+	"permissions": ["activeTab", "scripting", "tabs", "storage"],
+	"icons": {
+		"16": "/logo16.png",
+		"32": "/logo32.png",
+		"48": "/logo48.png",
+		"128": "/logo128.png"
+	},
+	"web_accessible_resources": [{
+		"matches": ["<all_urls>"],
+		"resources": ["common.js"]
+	}],
+	"content_scripts": [
+		{
+			"js": ["student.js"],
+			"matches": ["https://student.letovo.ru/*"],
+			"run_at": "document_end"
+		},
+		{
+			"js": ["canvas.js"],
+			"matches": ["https://canvas.letovo.ru/*"],
+			"run_at": "document_idle"
+		},
+		{
+			"js": ["chatgpt.js"],
+			"matches": ["https://chat.openai.com/*"],
+			"run_at": "document_idle"
+		}
+	],
+	"action": {
+		"default_popup": "ui.html",
+		"default_icon": {
+			"16": "/logo16.png",
+			"32": "/logo32.png",
+			"48": "/logo48.png",
+			"128": "/logo128.png"
+		}
+	}
+}
