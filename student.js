@@ -31,7 +31,7 @@
 		case "home":
 			console.log("Replacing news");
 			
-			const container = document.querySelector("body > div.container > div:nth-child(3) > div.col-md-8.col-sm-12.pt-2.pb-2");
+			const container = document.querySelector("*:has(> #news_list)");
 			const newsSel = document.querySelector("#news_list");
 			
 			const type = (await chromeStorageGetAsync(["type"])).type || "news";
@@ -66,7 +66,7 @@
 			
 			if((await chromeStorageGetAsync(["links"])).links) {
 				console.log("Adding links");
-				const links = document.querySelector("body > div.container > div:nth-child(3) > div.col-md-4.col-sm-12.pt-2.pb-2 > div:nth-child(1) > ul.mt-2.pl-4.pr-4");
+				const links = document.querySelector("div:has(> hr) > ul.mt-2");
 				for(let i of Object.entries({
 					"Canvas": "https://canvas.letovo.ru",
 					"Почта": "https://mail.yandex.ru",
