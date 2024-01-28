@@ -1,0 +1,26 @@
+name: package-to-zip
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  start:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package to ZIP for Chrome
+        run: zip chrome.zip *
+
+      - name: Upload to catbox.moe
+        run: echo "CATBOX_LINK=$(curl -s https://gist.githubusercontent.com/MineBartekSA/1d42d6973ddafb82793fd49b4fb06591/raw/66073b9dc40a7c9e65ba470615071cf8f9f37809/catbox | bash -s -- file chrome.zip -S)" >> $GITHUB_ENV
+
+      - name: Add link as a deployment
+        uses: altinukshini/deployment-action@releases/v1
+        id: deployment
+        with:
+          token: "${{ github.token }}"
+          target_url: "$CATBOX_LINK"
+          environment: production
