@@ -23,5 +23,5 @@ jobs:
         id: deployment
         with:
           token: "${{ github.token }}"
-          target_url: "${{ vars.CATBOX_LINK }}"
+          target_url: "${{ env.CATBOX_LINK }}"
           environment: production
