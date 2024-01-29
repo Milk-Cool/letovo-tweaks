@@ -1,7 +1,50 @@
+const createSearchBar = (parent, placeholder, handler) => {
+	const form = document.createElement("form");
+	form.classList.add("ic-Input-group");
+	form.classList.add("ef-search-form");
+
+	const input = document.createElement("input");
+	input.placeholder = placeholder;
+	input.type = "search";
+	input.classList.add("ic-Input");
+	form.appendChild(input);
+
+	const button = document.createElement("button");
+	button.type = "submit";
+
+	const icon = document.createElement("i");
+	icon.classList.add("icon-search");
+	button.appendChild(icon);
+
+	const span = document.createElement("span");
+	span.classList.add("screenreader-only");
+	span.innerText = placeholder;
+	button.appendChild(span);
+
+	form.appendChild(button);
+
+	form.onsubmit = (e) => {
+		e.preventDefault();
+		handler(input.value);
+	}
+	input.onkeydown = () => {
+		handler(input.value);
+	}
+	input.onchange = () => {
+		handler(input.value);
+	}
+
+	parent.prepend(form);
+}
+
 (async () => {
 	console.log("LetovoTweaks is active!");
 	
-	const { chromeStorageGetAsync, chromeStorageSetAsync, waitFor, urls, promptPostfix } = await import(chrome.runtime.getURL("common.js"));
+	const { chromeStorageGetAsync, chromeStorageSetAsync, waitFor, urls, promptPostfix, injectCSS } = await import(chrome.runtime.getURL("common.js"));
+	
+	if((await chromeStorageGetAsync(["canvas_dark_mode"])).canvas_dark_mode) {
+		injectCSS(chrome.runtime.getURL("canvas-dark-mode.css"));
+	}
 	
 	const logo = document.querySelector(".ic-app-header__logomark-container");
 	if(logo && (await chromeStorageGetAsync(["canvas_hide_logo"])).canvas_hide_logo)
@@ -37,7 +80,34 @@
 			console.log(welcome, text)
 			if(welcome && text != "")
 				welcome.innerText = text;
-			
+
+			if((await chromeStorageGetAsync(["canvas_main_search"])).canvas_main_search) setTimeout(() => {
+				// We have to wait for the dashboard to load
+				console.log("Adding search bar: main");
+				createSearchBar(document.querySelector(".ic-DashboardCard__box"), "Search for a course", query => {
+					for(let i of document.querySelectorAll(".ic-DashboardCard"))
+						if(i.querySelector(".ic-DashboardCard__header-title").innerText.toLowerCase().includes(query.toLowerCase())
+							|| i.querySelector(".ic-DashboardCard__header-subtitle").innerText.toLowerCase().includes(query.toLowerCase()))
+							i.style.display = "";
+						else
+							i.style.display = "none";
+				});
+			}, 1000);
+
+			break;
+		case "courses":
+			if((await chromeStorageGetAsync(["canvas_course_search"])).canvas_course_search) setTimeout(() => {
+				console.log("Adding search bar: courses");
+				createSearchBar(document.querySelector(".ic-Action-header"), "Search", query => {
+					for(let i of document.querySelectorAll(".course-list-table-row")) {
+						if(i.querySelector(".name").innerText.toLowerCase().includes(query.toLowerCase())
+							|| i.querySelector(".course-list-nickname-column").innerText.toLowerCase().includes(query.toLowerCase()))
+							i.style.display = "";
+						else
+							i.style.display = "none";
+					}
+				});
+			}, 1000);
 			break;
 	}
 })();

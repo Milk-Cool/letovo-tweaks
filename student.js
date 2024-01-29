@@ -56,18 +56,20 @@
 				infoHTML = parser.parseFromString(infoHTML, "text/html").querySelector(`body > div.container > div:nth-child(2) > div.col-lg-8.col-sm-12`);
 			}
 			
-			if(type != "news") {
+			if(type != "news" && newsSel) {
 				newsSel.remove();
 			}
 			
-			if(marksHTML !== null) container.appendChild(marksHTML);
-			if(summativesHTML !== null) container.appendChild(summativesHTML);
-			if(infoHTML !== null) container.appendChild(infoHTML);
+			if(container) {
+				if(marksHTML !== null) container.appendChild(marksHTML);
+				if(summativesHTML !== null) container.appendChild(summativesHTML);
+				if(infoHTML !== null) container.appendChild(infoHTML);
+			}
 			
 			if((await chromeStorageGetAsync(["links"])).links) {
 				console.log("Adding links");
 				const links = document.querySelector("div:has(> hr) > ul.mt-2");
-				for(let i of Object.entries({
+				if(links) for(let i of Object.entries({
 					"Canvas": "https://canvas.letovo.ru",
 					"Почта": "https://mail.yandex.ru",
 					"Навигатор": "https://navigator.letovo.ru",

@@ -11,6 +11,9 @@
 	document.querySelector("#canvas_custom_text").value = (await chromeStorageGetAsync(["canvas_custom_text"])).canvas_custom_text || "";
 	document.querySelector("#canvas_summarize").checked = (await chromeStorageGetAsync(["canvas_summarize"])).canvas_summarize || false;
 	document.querySelector("#canvas_hide_logo").checked = (await chromeStorageGetAsync(["canvas_hide_logo"])).canvas_hide_logo || false;
+	document.querySelector("#canvas_dark_mode").checked = (await chromeStorageGetAsync(["canvas_dark_mode"])).canvas_dark_mode || false;
+	document.querySelector("#canvas_main_search").checked = (await chromeStorageGetAsync(["canvas_main_search"])).canvas_main_search || false;
+	document.querySelector("#canvas_course_search").checked = (await chromeStorageGetAsync(["canvas_course_search"])).canvas_course_search || false;
 	
 	console.log(document.querySelector("#home").value);
 	
@@ -25,7 +28,10 @@
 			"hide_logo": document.querySelector("#hide_logo").checked,
 			"canvas_custom_text": document.querySelector("#canvas_custom_text").value,
 			"canvas_summarize": document.querySelector("#canvas_summarize").checked,
-			"canvas_hide_logo": document.querySelector("#canvas_hide_logo").checked
+			"canvas_hide_logo": document.querySelector("#canvas_hide_logo").checked,
+			"canvas_dark_mode": document.querySelector("#canvas_dark_mode").checked,
+			"canvas_main_search": document.querySelector("#canvas_main_search").checked,
+			"canvas_course_search": document.querySelector("#canvas_course_search").checked
 		});
 	}, 20);
 })();

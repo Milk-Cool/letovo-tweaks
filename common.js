@@ -17,6 +17,14 @@ const urls = {
 	"chatgpt_icon": "https://www.pngall.com/wp-content/uploads/15/ChatGPT-Logo-PNG-File.png",
 	"chatgpt": "https://chat.openai.com/#letovo"
 }
+
+const injectCSS = path => {
+	const link = document.querySelector("link");
+	link.rel = "stylesheet";
+	link.href = path;
+	link.type = "text/css";
+	document.head.appendChild(link);
+}
 	
 export {
 	chromeStorageGetAsync,
@@ -24,5 +32,6 @@ export {
 	waitFor,
 	delay,
 	urls,
-	promptPostfix
+	promptPostfix,
+	injectCSS
 };
