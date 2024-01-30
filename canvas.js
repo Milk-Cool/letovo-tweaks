@@ -52,19 +52,38 @@ const createSearchBar = (parent, placeholder, handler) => {
 
 	const menu = document.querySelector("#menu");
 	if(menu && (await chromeStorageGetAsync(["canvas_button_tododo"])).canvas_button_tododo) {
-		// Too lazy to do it through appending elements
-		menu.innerHTML += `
-			<li class="menu-item ic-app-header__menu-list-item">
-				<a id="global_nav_tododo_link" role="button" href="https://elk.letovo.ru/student/tododo/tasks" class="ic-app-header__menu-list-link" target="_blank">
-				<div class="menu-item-icon-container" aria-hidden="true">
-					<img src="https://img.icons8.com/?size=256&id=4023&format=png" width="28" height="28" style="filter: invert(100%)">
-				</div>
-				<div class="menu-item__text">
-					ToDoDo
-				</div>
-				</a>
-			</li>
-		`;
+		const li = document.createElement("li");
+		li.classList.add("menu-item");
+		li.classList.add("ic-app-header__menu-list-item");
+
+		const a = document.createElement("a");
+		a.id = "global_nav_tododo_link";
+		a.role = "button";
+		a.href = "https://elk.letovo.ru/student/tododo/tasks";
+		a.classList.add("ic-app-header__menu-list-link");
+		a.target = "_blank";
+
+		const divIconContainer = document.createElement("div");
+		divIconContainer.classList.add("menu-item-icon-container");
+		divIconContainer.setAttribute("aria-hidden", "true");
+
+		const img = document.createElement("img");
+		img.src = "https://img.icons8.com/?size=256&id=4023&format=png";
+		img.width = "28";
+		img.height = "28";
+		img.style.filter = "invert(100%)";
+		divIconContainer.appendChild(img);
+
+		const divText = document.createElement("div");
+		divText.classList.add("menu-item__text");
+		divText.innerText = "ToDoDo";
+
+		a.appendChild(divIconContainer);
+		a.appendChild(divText);
+
+		li.appendChild(a);
+
+		menu.appendChild(li);
 	}
 	
 	const trimmed = location.pathname.replace(/^\/+|\/+$/g, "");
