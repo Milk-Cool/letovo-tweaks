@@ -26,6 +26,23 @@
 	if(logo && (await chromeStorageGetAsync(["hide_logo"])).hide_logo) {
 		logo.remove();
 	}
+	const buttonsContainer = document.querySelector("body > div:nth-child(6)");
+	if((await chromeStorageGetAsync(["button_tododo"])).button_tododo) {
+		const button = document.createElement("button");
+		button.innerText = "ToDo";
+		button.classList.add("btn");
+		button.classList.add("btn-primary");
+		button.classList.add("btn-block");
+		button.classList.add("btn-lg");
+		button.classList.add("p-0");
+
+		button.style.width = "50px";
+		button.style.height = "50px";
+		button.onclick = () => window.open("https://elk.letovo.ru/student/tododo/tasks");
+
+		buttonsContainer.style.height = "105px";
+		buttonsContainer.appendChild(button);
+	}
 
 	switch(location.pathname.replace(/^\/+|\/+$/g, "")) {
 		case "home":

@@ -14,6 +14,8 @@
 	document.querySelector("#canvas_dark_mode").checked = (await chromeStorageGetAsync(["canvas_dark_mode"])).canvas_dark_mode || false;
 	document.querySelector("#canvas_main_search").checked = (await chromeStorageGetAsync(["canvas_main_search"])).canvas_main_search || false;
 	document.querySelector("#canvas_course_search").checked = (await chromeStorageGetAsync(["canvas_course_search"])).canvas_course_search || false;
+	document.querySelector("#button_tododo").checked = (await chromeStorageGetAsync(["button_tododo"])).button_tododo || false;
+	document.querySelector("#canvas_button_tododo").checked = (await chromeStorageGetAsync(["canvas_button_tododo"])).canvas_button_tododo || false;
 	
 	console.log(document.querySelector("#home").value);
 	
@@ -31,7 +33,9 @@
 			"canvas_hide_logo": document.querySelector("#canvas_hide_logo").checked,
 			"canvas_dark_mode": document.querySelector("#canvas_dark_mode").checked,
 			"canvas_main_search": document.querySelector("#canvas_main_search").checked,
-			"canvas_course_search": document.querySelector("#canvas_course_search").checked
+			"canvas_course_search": document.querySelector("#canvas_course_search").checked,
+			"button_tododo": document.querySelector("#button_tododo").checked,
+			"canvas_button_tododo": document.querySelector("#canvas_button_tododo").checked
 		});
 	}, 20);
 })();

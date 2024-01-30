@@ -15,7 +15,8 @@ const promptPostfix = "\n\nСократи этот текст / Summarize this t
 
 const urls = {
 	"chatgpt_icon": "https://www.pngall.com/wp-content/uploads/15/ChatGPT-Logo-PNG-File.png",
-	"chatgpt": "https://chat.openai.com/#letovo"
+	"chatgpt": "https://chat.openai.com/#letovo",
+	"tododo": "https://elk.letovo.ru/student/tododo/tasks"
 }
 
 const injectCSS = path => {
