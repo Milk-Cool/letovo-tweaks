@@ -32,6 +32,11 @@
 			"js": ["chatgpt.js"],
 			"matches": ["https://chat.openai.com/*"],
 			"run_at": "document_idle"
+		},
+		{
+			"js": ["elk.js"],
+			"matches": ["https://elk.letovo.ru/*"],
+			"run_at": "document_end"
 		}
 	],
 	"action": {

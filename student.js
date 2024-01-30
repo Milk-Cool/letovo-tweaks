@@ -27,7 +27,7 @@
 		logo.remove();
 	}
 	const buttonsContainer = document.querySelector("body > div:nth-child(6)");
-	if((await chromeStorageGetAsync(["button_tododo"])).button_tododo) {
+	if(buttonsContainer && (await chromeStorageGetAsync(["button_tododo"])).button_tododo) {
 		const button = document.createElement("button");
 		button.innerText = "ToDo";
 		button.classList.add("btn");
