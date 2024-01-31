@@ -1,7 +1,7 @@
 {
 	"name": "Letovo Tweaks",
 	"description": "Дополнительные настройки для летовских сайтов.",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"manifest_version": 3,
 	"permissions": ["activeTab", "scripting", "tabs", "storage"],
 	"icons": {
