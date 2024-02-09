@@ -28,7 +28,7 @@ const createSearchBar = (parent, placeholder, handler) => {
 		handler(input.value);
 	}
 	input.onkeydown = () => {
-		handler(input.value);
+		setTimeout(handler, 2, input.value);
 	}
 	input.onchange = () => {
 		handler(input.value);
